@@ -38,6 +38,14 @@ namespace ConsoleApplication1
                 .PostMultipartAsync(m => m
                     .AddString("\"key1\"", "value1")
                     .AddStringParts(new { key2 = "value2" })
+                    .AddFile("\"quoted-name\"", File.OpenRead("img.png"), "fileName"))
+                .ReceiveString()
+                .Result;
+
+            var res5 = "http://localhost:64728/Default.aspx"
+                .PostMultipartAsync(m => m
+                    .AddString("\"key1\"", "value1")
+                    .AddStringParts(new { key2 = "value2" })
                     .AddFile("\"quoted-name\"", File.OpenRead("img.png"), "\"quoted-fileName\""))
                 .ReceiveString()
                 .Result;
